@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Training Schedule Planner</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f6f8;
+      color: #333;
+    }
+
+    header {
+      background: #4c74f0;
+      color: white;
+      padding: 2rem;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2.5rem;
+    }
+
+    main {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 2rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+      padding: 2rem;
+      max-width: 350px;
+      width: 100%;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    h2 {
+      margin-top: 0;
+      font-size: 1.8rem;
+      color: #4c74f0;
+    }
+
+    label {
+      display: block;
+      margin: 0.5rem 0 0.25rem;
+      font-weight: bold;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      margin-bottom: 1rem;
+      font-size: 1rem;
+    }
+
+    button {
+      background-color: #4c74f0;
+      color: white;
+      border: none;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #3a5dd9;
+    }
+
+    .summary {
+      max-width: 750px;
+      margin: 2rem auto;
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      padding: 2rem;
+    }
+
+    .summary h2 {
+      color: #222;
+    }
+
+    .summary p {
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+        align-items: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Workout & Basketball Training Planner</h1>
+  </header>
+
+  <main>
+    <!-- Workout Card -->
+    <div class="card">
+      <h2>Workout Schedule</h2>
+      <label for="day">Day</label>
+      <select id="day">
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+      </select>
+
+      <label for="start-time-workout">Start Time</label>
+      <input type="time" id="start-time-workout">
+
+      <label for="end-time-workout">End Time</label>
+      <input type="time" id="end-time-workout">
+
+      <label for="workout">Workout Details</label>
+      <textarea id="workout" placeholder="e.g., Chest press, squats, cardio..."></textarea>
+
+      <button onclick="saveWorkout()">Save Workout</button>
+    </div>
+
+    <!-- Basketball Card -->
+    <div class="card">
+      <h2>Basketball Training</h2>
+
+      <label for="drills">Skill Focus</label>
+      <select id="drills">
+        <option>Shooting</option>
+        <option>Dribbling</option>
+        <option>Defense</option>
+        <option>Conditioning</option>
+        <option>Game Play</option>
+      </select>
+
+      <label for="start-time-basketball">Start Time</label>
+      <input type="time" id="start-time-basketball">
+
+      <label for="end-time-basketball">End Time</label>
+      <input type="time" id="end-time-basketball">
+
+      <label for="basketball-notes">Training Notes</label>
+      <textarea id="basketball-notes" placeholder="e.g., 30 mins shooting drills, 1-on-1 defense..."></textarea>
+
+      <button onclick="saveBasketball()">Save Training</button>
+    </div>
+  </main>
+
+  <section class="summary" id="summary">
+    <h2>Today's Schedule</h2>
+    <div id="output"></div>
+  </section>
+
+  <script>
+    function saveWorkout() {
+      const day = document.getElementById('day').value;
+      const start = document.getElementById('start-time-workout').value;
+      const end = document.getElementById('end-time-workout').value;
+      const workout = document.getElementById('workout').value;
+
+      const output = document.getElementById('output');
+      const workoutText = `
+        <p><strong>${day} - Workout:</strong><br>
+        ${start} to ${end}<br>
+        ${workout}</p>
+      `;
+      output.innerHTML += workoutText;
+    }
+
+    function saveBasketball() {
+      const drill = document.getElementById('drills').value;
+      const start = document.getElementById('start-time-basketball').value;
+      const end = document.getElementById('end-time-basketball').value;
+      const notes = document.getElementById('basketball-notes').value;
+
+      const output = document.getElementById('output');
+      const basketballText = `
+        <p><strong>Basketball Training - ${drill}:</strong><br>
+        ${start} to ${end}<br>
+        ${notes}</p>
+      `;
+      output.innerHTML += basketballText;
+    }
+  </script>
+
+</body>
+</html>
